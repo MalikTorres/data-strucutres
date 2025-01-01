@@ -36,15 +36,15 @@ const restaurant = {
     time = '20:00',
     address,
   }) {
-    console.log(
-      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
-    );
+    // console.log(
+    //   `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    // );
   },
 
   orderPasta: function (ing1, ing2, ing3) {
-    console.log(
-      `Here is your delicious pasta with ${ing1}, ${ing2}, and ${ing3} `
-    );
+    // console.log(
+    //   `Here is your delicious pasta with ${ing1}, ${ing2}, and ${ing3} `
+    // );
   },
 
   orderPizza: function (mainIngredient, ...otherIngredients) {
@@ -290,6 +290,39 @@ const books = [
   },
 ];
 
+// Short circuting(&& and ||)
+
+console.log('---- OR -----');
+// use ANY data type, return ANY data type, short-circuting
+console.log(3 || 'Malik');
+console.log('' || 'Malik');
+console.log(true || 0);
+console.log(undefined || null);
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+console.log('---- AND ----');
+console.log(0 && 'Malik');
+console.log(7 && 'Malik');
+
+console.log('Hello' && 23 && null && 'Malik');
+
+// Practical example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrooms', 'spinach');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+
+
+
 // Rest Pattern and Parameters
 
 // 1) Destructuring
@@ -305,12 +338,12 @@ const [pizza, , risotto, ...otherFood] = [
   ...restaurant.starterMenu,
 ];
 
-console.log(pizza, risotto, otherFood);
+// console.log(pizza, risotto, otherFood);
 
 // Objects
 
 const { sat, ...weekdays } = restaurant.openingHours;
- console.log(weekdays);
+//  console.log(weekdays);
 
 // 2) Functions
 const add = function (...numbers) {
@@ -327,8 +360,8 @@ add(8, 2, 5, 3, 2, 1, 4);
 
 const x = [23, 5, 7];
 add(...x);
-restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
-restaurant.orderPizza('mushrooms');
+// restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+// restaurant.orderPizza('mushrooms');
 
 // Assignments
 
@@ -338,20 +371,18 @@ Destructure the keywords property (array) of the first book from the books array
 */
 
 const [mainKeyword, ...rest] = books[0].keywords;
-console.log(mainKeyword,rest);  
+// console.log(mainKeyword,rest);
 
 /*
 Destructure the second book from the books array into a variable called bookPublisher. The bookPublisher variable should be assigned with the value of the publisher property of the book object. Assign the rest of the properties to the restOfTheBook variable.
 */
 
-const {publisher:bookPublisher, ...restOfTheBook} = books[1];
-console.log(restOfTheBook);
+const { publisher: bookPublisher, ...restOfTheBook } = books[1];
+// console.log(restOfTheBook);
 
-
-
-const printBookAuthorsCount = function (title, ...authors){
-  console.log(`The book ${title} has ${authors.length} authors`);
-}
+const printBookAuthorsCount = function (title, ...authors) {
+  // console.log(`The book ${title} has ${authors.length} authors`);
+};
 
 printBookAuthorsCount('Algorithms', 'Robert Sedgewick', 'Kevin Wayne');
 
