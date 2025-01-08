@@ -290,36 +290,7 @@ const books = [
   },
 ];
 
-// Short circuting(&& and ||)
 
-console.log('---- OR -----');
-// use ANY data type, return ANY data type, short-circuting
-console.log(3 || 'Malik');
-console.log('' || 'Malik');
-console.log(true || 0);
-console.log(undefined || null);
-
-console.log(undefined || 0 || '' || 'Hello' || 23 || null);
-
-restaurant.numGuests = 23;
-const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
-console.log(guests1);
-
-const guests2 = restaurant.numGuests || 10;
-console.log(guests2);
-
-console.log('---- AND ----');
-console.log(0 && 'Malik');
-console.log(7 && 'Malik');
-
-console.log('Hello' && 23 && null && 'Malik');
-
-// Practical example
-if (restaurant.orderPizza) {
-  restaurant.orderPizza('mushrooms', 'spinach');
-}
-
-restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
 
 
 
@@ -440,7 +411,7 @@ Declare an array called bookAuthors, and fill it with authors of the first two b
 /* Write a function called spellWord that accepts a single string as an argument. This function should log to the console each letter of the argument separated by a space.*/
 
 // function spellWord(str) {
-
+  
 //  let word = str
 //  console.log(...word)
 // }
@@ -464,92 +435,179 @@ Declare an array called bookAuthors, and fill it with authors of the first two b
 
 // Nested objects
 // const {
-//   fri: {open, close}
-// } = openingHours
-// console.log(open, close);
+  //   fri: {open, close}
+  // } = openingHours
+  // console.log(open, close);
+  
+  // Destructuring Objects assignments
+  
+  // 2.4
+  let bookTitle = 'unknown';
+  let bookAuthor = 'unkown';
+  
+  // let objB = {bookTitle: books[0].title, bookAuthor: books[0].author}
+  // Assignment solution 2.5
+  ({ title: bookTitle, author: bookAuthor } = books[0]);
+  // console.log(objB);
+  
+  //2.5
+  // MY SOLUTION
+  // let bookRating = books[0].thirdParty.goodreads.rating;
+  // console.log(bookRating);
+  
+  // ASSIGNMENT SOLUTION
+  const {
+    thirdParty: {
+      goodreads: { bookRating },
+    },
+  } = books[0];
+  
+  // Similar problem to 2.5
+  
+  /*
+  Using the books array, destructure the sixth book object to extract the following properties:
+  
+  The title of the book.
+  The reviewsCount from the goodreads nested object. Rename it to totalReviews.
+  The pages property. Rename it to pageCount.
+  Do most of the work on the left side of the assignment operator.
+  
+  After destructuring, print the values of title, totalReviews, and pageCount.
+  */
+ // SOLUTION //
+ const {
+   title,
+   thirdParty: {
+     goodreads: { reviewsCount: totalReviews },
+    },
+    pages: pageCount,
+  } = books[5];
+  
+  // console.log(`Title: ${title}`);
+  // console.log(`Good reads review count ${totalReviews}`);
+  // console.log(`Pages ${pageCount}`);
+  
+  // DESTRUCTURING ARRAYS//
+  
+  // const arr = [2, 3, 4];
+  // const a = arr[0];
+  // const b = arr[1];
+  // const c = arr[2];
+  
+  // const [x, y, z] = arr;
+  // console.log(x, y, z);
+  // console.log(arr);
+  
+  // let [main, , secondary] = restaurant.categories;
+  //console.log(main, secondary);
+  
+  // Switching Variables
+  // let temp = main;
+  // main = secondary
+  // secondary = temp;
+  
+  // [main, secondary] = [secondary, main]
+  //console.log(main, secondary);
+  
+  // Recevie 2 return values from a function
+  // const [starter, mainCourse] = restaurant.order(2, 0);
+  //console.log(starter, mainCourse);
+  
+  // Nested destructuring
+  // const nested = [2, 4, [5, 6]];
+  // const [i, ,j] = nested;
+  // console.log(i, j);
+  // const [i, , [j, k]] = nested;
+  //console.log(i, j, k);
+  
+  // Default values
+  // const [p = 1, q = 1, r = 1] = [8, 9];
+  
+  //console.log(p, q, r);
+  
+  // Short circuting(&& and ||)
+  
+  //console.log('---- OR -----');
+  // use ANY data type, return ANY data type, short-circuting
+  // console.log(3 || 'Malik');
+  // console.log('' || 'Malik');
+  // console.log(true || 0);
+  // console.log(undefined || null);
+  
+  // console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+  
+  // restaurant.numGuests = 23;
+  // const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+  // console.log(guests1);
+  
+  // const guests2 = restaurant.numGuests || 10;
+  // console.log(guests2);
+  
+  // console.log('---- AND ----');
+  // console.log(0 && 'Malik');
+  // console.log(7 && 'Malik');
+  
+  // console.log('Hello' && 23 && null && 'Malik');
+  
+  // Practical example
+  if (restaurant.orderPizza) {
+    restaurant.orderPizza('mushrooms', 'spinach');
+  }
+  
+  restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+  
+  // SHORT CIRCUTING ASSIGNMENTS
+  
+  /*Some of the book objects have the programmingLanguage property, which specifies what programming language is used in the book, for example
+  
+  {
+    title: 'Algorithms',
+    author: ['Robert Sedgewick', 'Kevin Wayne'],
+    ...
+    programmingLanguage: 'Java',     // <-- HERE
+    }
+    Write a function called hasExamplesInJava that takes a book object from the books array as an argument. This function should return true if the book uses Java, or a string 'no data available' if it uses other language or no programming language at all.*/
+    
+    function asExamplesInJava(obj) {
+      obj = books.programmingLanguage === 'Java' || 'no data available';
+      
+      return obj;
+    }
+    let result = asExamplesInJava(books[0]);
+    console.log(result);
+    
+    /*
+    Some of the book objects have the onlineContent property, which is either true or false. Loop over the books array, and for the books that provide online content, log to the console a string in this format: "${title}" provides online content. Use short-circuiting.
+    
+    {
+      title: 'Operating System Concepts',
+      ... removed for clarity
+      onlineContent: false,          // <-- HERE
+      },
+      
+      
+      
+      */
+     
+     // books.forEach(book => {
+      //   let title = book.title;
+      //   book.onlineContent && console.log(`"${title}" provides online content`);
+      // });
+      // The Nullish Coalescing Operator(??)
+      
+      //restaurant.numGuests = 0;
+      const guests = restaurant.numGuests || 10;
+      console.log(guests);
+      
+      // Nullish" null and undefined (NOT 0 or '')
+      const guestCorrect = restaurant.numGuests ?? 10;
+      console.log(guestCorrect);
+      // The Nullish Coalescing Operator(??) ASSIGNMENTS
 
-// Destructuring Objects assignments
-
-// 2.4
-let bookTitle = 'unknown';
-let bookAuthor = 'unkown';
-
-// let objB = {bookTitle: books[0].title, bookAuthor: books[0].author}
-// Assignment solution 2.5
-({ title: bookTitle, author: bookAuthor } = books[0]);
-// console.log(objB);
-
-//2.5
-// MY SOLUTION
-// let bookRating = books[0].thirdParty.goodreads.rating;
-// console.log(bookRating);
-
-// ASSIGNMENT SOLUTION
-const {
-  thirdParty: {
-    goodreads: { bookRating },
-  },
-} = books[0];
-
-// Similar problem to 2.5
-
-/*
-Using the books array, destructure the sixth book object to extract the following properties:
-
-The title of the book.
-The reviewsCount from the goodreads nested object. Rename it to totalReviews.
-The pages property. Rename it to pageCount.
-Do most of the work on the left side of the assignment operator.
-
-After destructuring, print the values of title, totalReviews, and pageCount.
-*/
-// SOLUTION //
-const {
-  title,
-  thirdParty: {
-    goodreads: { reviewsCount: totalReviews },
-  },
-  pages: pageCount,
-} = books[5];
-
-// console.log(`Title: ${title}`);
-// console.log(`Good reads review count ${totalReviews}`);
-// console.log(`Pages ${pageCount}`);
-
-// DESTRUCTURING ARRAYS//
-
-// const arr = [2, 3, 4];
-// const a = arr[0];
-// const b = arr[1];
-// const c = arr[2];
-
-// const [x, y, z] = arr;
-// console.log(x, y, z);
-// console.log(arr);
-
-// let [main, , secondary] = restaurant.categories;
-//console.log(main, secondary);
-
-// Switching Variables
-// let temp = main;
-// main = secondary
-// secondary = temp;
-
-// [main, secondary] = [secondary, main]
-//console.log(main, secondary);
-
-// Recevie 2 return values from a function
-// const [starter, mainCourse] = restaurant.order(2, 0);
-//console.log(starter, mainCourse);
-
-// Nested destructuring
-// const nested = [2, 4, [5, 6]];
-// const [i, ,j] = nested;
-// console.log(i, j);
-// const [i, , [j, k]] = nested;
-//console.log(i, j, k);
-
-// Default values
-// const [p = 1, q = 1, r = 1] = [8, 9];
-
-//console.log(p, q, r);
+      /*There are objects in the books array that don't have the onlineContent property at all. Loop over the books array, and log a string to the console in this format: "${title}" provides no data about its online content. */
+        
+      books.forEach((book)=>{
+        let title = book.title;
+        book.onlineContent ??
+          console.log(`${title} provides no data about its online content.`);
+      });
